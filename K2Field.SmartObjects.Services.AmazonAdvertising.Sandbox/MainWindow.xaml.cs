@@ -38,6 +38,37 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
 
         private void btnLookupItem_Click(object sender, RoutedEventArgs e)
         {
+        
+
+
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(@"c:\advertising.xml");
+            
+
+            //XmlElement xe = 
+            //xe.InnerXml = doc.OuterXml;
+
+            //XmlNamespaceManager nsmgr = new XmlNamespaceManager(xe.OwnerDocument.NameTable);
+            //nsmgr.AddNamespace("", xe.OwnerDocument.DocumentElement.NamespaceURI);
+
+
+
+
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("ns1", "http://webservices.amazon.com/AWSECommerceService/2011-08-01");
+            //xnm.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            //xnm.AddNamespace("xsd", "http://www.w3.org/2001/XMLSchema");
+
+
+            XmlNode attributes = doc.SelectSingleNode("/ns1:ItemLookupResponse/ns1:Items/ns1:Item/ns1:ItemAttributes", nsmgr);
+
+
+            MessageBox.Show(attributes.ChildNodes.Count.ToString());
+
+            return;
+
+
             IDictionary<string, string> r1 = new Dictionary<string, String>();
             r1["Service"] = "AWSECommerceService";
             //r1["Version"] = "2009-03-31";

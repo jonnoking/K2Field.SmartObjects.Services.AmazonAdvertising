@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using System.Xml.Serialization;
 using AmazonProductAdvtApi;
 using System.IO;
+using System.Xml;
 
 namespace K2Field.SmartObjects.Services.AmazonAdvertising
 {
@@ -34,6 +35,8 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         [Attributes.Property("SearchIndex", SoType.Text, "Search Index", "Search Index")]
         public string SearchIndex { get; set; }
 
+        [Attributes.Property("Condition", SoType.Text, "Condition", "Condition")]
+        public string Condition { get; set; } // All, New, Collectible, Refurbished
 
         // Standard Returns
         [Attributes.Property("ASIN", SoType.Text, "ASIN", "ASIN")]
@@ -67,6 +70,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         [Attributes.Property("ResultXML", SoType.Memo, "Result XML", "Result XML")]
         public string ResultXML { get; set; }
 
+        [Attributes.Property("AttributeName", SoType.Text, "Attribute Name", "Attribute Name")]
+        public string AttributeName { get; set; }
+
+        [Attributes.Property("AttributeValue", SoType.Text, "Attribute Value", "Attribute Value")]
+        public string AttributeValue { get; set; }
+
+
+
         [Attributes.Property("ErrorCode", SoType.Text, "Error Code", "Error Code")]
         public string ErrorCode { get; set; }
 
@@ -84,32 +95,107 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
 
 
+        [Attributes.Method("Lookup Item", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.Read, "Lookup Item", "Lookup Item",
+        new string[] { "ItemId", "IdType" }, //required property array (no required properties for this sample)
+        new string[] { "ItemId", "IdType", "SearchIndex", "Condition" }, //input property array (no optional input properties for this sample)
+        new string[] { "ItemId", "IdType", "SearchIndex", "Condition", "ASIN", "ParentASIN", "Manufacturer", "ProductGroup", "Title", "DetailPageUrl", "SmallImageUrl", "MediumImageUrl", "LargeImageUrl", "ResultXML", "ErrorCode", "ErrorMessage", "ResultStatus", "ResultMessage" })]
+        public AmazonItemLookup ItemLookupByInput()
+        {
+            return GetResult();
+        }
+
+
         [Attributes.Method("ItemLookupByUPC", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.Read, "Item Lookup By UPC", "Item Lookup By UPC",
         new string[] { "ItemId" }, //required property array (no required properties for this sample)
-        new string[] { "ItemId" }, //input property array (no optional input properties for this sample)
-        new string[] { "ItemId", "IdType", "SearchIndex", "ASIN", "ParentASIN", "Manufacturer", "ProductGroup", "Title", "DetailPageUrl", "SmallImageUrl", "MediumImageUrl", "LargeImageUrl", "ResultXML",  "ErrorCode", "ErrorMessage", "ResultStatus", "ResultMessage" })]
+        new string[] { "ItemId", "SearchIndex", "Condition" }, //input property array (no optional input properties for this sample)
+        new string[] { "ItemId", "IdType", "SearchIndex", "Condition", "ASIN", "ParentASIN", "Manufacturer", "ProductGroup", "Title", "DetailPageUrl", "SmallImageUrl", "MediumImageUrl", "LargeImageUrl", "ResultXML",  "ErrorCode", "ErrorMessage", "ResultStatus", "ResultMessage" })]
         public AmazonItemLookup ItemLookupByUPC()
+        {
+            this.IdType = "UPC";
+            return GetResult();
+        }
+
+
+        [Attributes.Method("ItemLookupByASIN", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.Read, "Item Lookup By ASIN", "Item Lookup By ASIN",
+        new string[] { "ItemId" }, //required property array (no required properties for this sample)
+        new string[] { "ItemId", "SearchIndex", "Condition" }, //input property array (no optional input properties for this sample)
+        new string[] { "ItemId", "IdType", "SearchIndex", "Condition", "ASIN", "ParentASIN", "Manufacturer", "ProductGroup", "Title", "DetailPageUrl", "SmallImageUrl", "MediumImageUrl", "LargeImageUrl", "ResultXML", "ErrorCode", "ErrorMessage", "ResultStatus", "ResultMessage" })]
+        public AmazonItemLookup ItemLookupByASIN()
+        {
+            this.IdType = "ASIN";
+            return GetResult();
+        }
+
+        [Attributes.Method("ItemLookupByISBN", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.Read, "Item Lookup By ISBN", "Item Lookup By ISBN",
+        new string[] { "ItemId" }, //required property array (no required properties for this sample)
+        new string[] { "ItemId", "SearchIndex", "Condition" }, //input property array (no optional input properties for this sample)
+        new string[] { "ItemId", "IdType", "SearchIndex", "Condition", "ASIN", "ParentASIN", "Manufacturer", "ProductGroup", "Title", "DetailPageUrl", "SmallImageUrl", "MediumImageUrl", "LargeImageUrl", "ResultXML", "ErrorCode", "ErrorMessage", "ResultStatus", "ResultMessage" })]
+        public AmazonItemLookup ItemLookupByISBN()
+        {
+            this.IdType = "ISBN";
+            return GetResult();
+        }
+
+        [Attributes.Method("ItemLookupBySKU", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.Read, "Item Lookup By SKU", "Item Lookup By SKU",
+        new string[] { "ItemId" }, //required property array (no required properties for this sample)
+        new string[] { "ItemId", "SearchIndex", "Condition" }, //input property array (no optional input properties for this sample)
+        new string[] { "ItemId", "IdType", "SearchIndex", "Condition", "ASIN", "ParentASIN", "Manufacturer", "ProductGroup", "Title", "DetailPageUrl", "SmallImageUrl", "MediumImageUrl", "LargeImageUrl", "ResultXML", "ErrorCode", "ErrorMessage", "ResultStatus", "ResultMessage" })]
+        public AmazonItemLookup ItemLookupBySKU()
+        {
+            this.IdType = "SKU";
+            return GetResult();
+        }
+
+        [Attributes.Method("ItemLookupByEAN", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.Read, "Item Lookup By EAN", "Item Lookup By EAN",
+        new string[] { "ItemId" }, //required property array (no required properties for this sample)
+        new string[] { "ItemId", "SearchIndex", "Condition" }, //input property array (no optional input properties for this sample)
+        new string[] { "ItemId", "IdType", "SearchIndex", "Condition", "ASIN", "ParentASIN", "Manufacturer", "ProductGroup", "Title", "DetailPageUrl", "SmallImageUrl", "MediumImageUrl", "LargeImageUrl", "ResultXML", "ErrorCode", "ErrorMessage", "ResultStatus", "ResultMessage" })]
+        public AmazonItemLookup ItemLookupByEAN()
+        {
+            this.IdType = "EAN";
+            return GetResult();
+        }
+
+        private AmazonItemLookup GetResult()
         {
             var settings = new Settings(ServiceConfiguration);
 
             try
             {
+                string searchindex = "All";
+                if (!string.IsNullOrWhiteSpace(this.SearchIndex))
+                {
+                    searchindex = this.SearchIndex;
+                }
+
+                string condition = "All";
+                if (!string.IsNullOrWhiteSpace(this.Condition))
+                {
+                    condition = this.Condition;
+                }
+
                 IDictionary<string, string> query = new Dictionary<string, String>();
                 query["Service"] = "AWSECommerceService";
                 query["AssociateTag"] = settings.AssoicateTag;
                 query["Operation"] = "ItemLookup";
                 query["ItemId"] = this.ItemId;
-                query["IdType"] = "UPC";
+                query["IdType"] = this.IdType;
                 query["ResponseGroup"] = "Images,ItemAttributes";
-                query["SearchIndex"] = "All"; // needed for UPC
+
+                if(!this.IdType.Equals("ASIN", StringComparison.OrdinalIgnoreCase))
+                {
+                    query["SearchIndex"] = searchindex; 
+                }
+                
+                query["Condition"] = condition;
 
                 var item = ExecuteItemLookup(query, settings.AWSAccessKeyId, settings.AWSSecretKey, settings.Marketplace);
 
-
                 var returnItem = MapProperties(item);
                 returnItem.ItemId = this.ItemId;
-                returnItem.IdType = "UPC";
-                returnItem.SearchIndex = "All"; //this.SearchIndex; // should come from response                
+                returnItem.IdType = this.IdType;
+                returnItem.SearchIndex = searchindex;
+                returnItem.Condition = condition;
 
                 returnItem.ResultStatus = "OK";
 
@@ -122,6 +208,82 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
                 return this;
             }
         }
+
+        [Attributes.Method("ListItemLookupAttributes", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.List, "List Item Lookup Attibutes", "List Item Lookup Attibutes",
+        new string[] { "ResultXML" }, //required property array (no required properties for this sample)
+        new string[] { "ResultXML" }, //input property array (no optional input properties for this sample)
+        new string[] { "AttributeName", "AttributeValue" })]
+        public List<AmazonItemLookup> ListItemLookupAttributes()
+        {
+            var settings = new Settings(ServiceConfiguration);
+            List<AmazonItemLookup> items = new List<AmazonItemLookup>();
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(this.ResultXML);
+                XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+                nsmgr.AddNamespace("ns", "http://webservices.amazon.com/AWSECommerceService/2011-08-01");
+
+                XmlNode attributes = doc.SelectSingleNode("/ns:ItemLookupResponse/ns:Items/ns:Item/ns:ItemAttributes", nsmgr);
+
+                foreach (XmlNode attribute in attributes.ChildNodes)
+                {
+                    AmazonItemLookup item = new AmazonItemLookup();
+                    item.AttributeName = attribute.Name;
+                    item.AttributeValue = attribute.InnerText;
+
+                    items.Add(item);
+                }
+                
+                return items;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //this.ResultStatus = "Exception";
+                //this.ResultMessage = ex.GetBaseException().Message;
+                //return this;
+            }
+        }
+
+        [Attributes.Method("GetItemLookupAttributes", SourceCode.SmartObjects.Services.ServiceSDK.Types.MethodType.Read, "Get Item Lookup Attibute", "Get Item Lookup Attibute",
+        new string[] { "ResultXML", "AttributeName" }, //required property array (no required properties for this sample)
+        new string[] { "ResultXML", "AttributeName" }, //input property array (no optional input properties for this sample)
+        new string[] { "AttributeName", "AttributeValue", "ResultStatus", "ResultMessage" })]
+        public AmazonItemLookup GetItemLookupAttribute()
+        {
+            var settings = new Settings(ServiceConfiguration);
+            AmazonItemLookup item = new AmazonItemLookup();
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(this.ResultXML);
+
+                XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+                nsmgr.AddNamespace("ns", "http://webservices.amazon.com/AWSECommerceService/2011-08-01");
+
+                XmlNode attribute = doc.SelectSingleNode("/ns:ItemLookupResponse/ns:Items/ns:Item/ns:ItemAttributes/ns:" + this.AttributeName, nsmgr);
+
+                if (attribute != null)
+                {
+                    this.ResultStatus = "OK";
+                    this.AttributeValue = attribute.InnerText;
+                }
+                else
+                {
+                    this.ResultStatus = "Not Found";
+                }
+                
+                return this;
+            }
+            catch (Exception ex)
+            {
+                this.ResultStatus = "Exception";
+                this.ResultMessage = ex.GetBaseException().Message;
+                return this;
+            }
+        }
+
 
         private AmazonItemLookup MapProperties(ItemLookupResponse response)
         {

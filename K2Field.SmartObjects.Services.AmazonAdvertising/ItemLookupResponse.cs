@@ -670,7 +670,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -688,7 +688,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -708,7 +708,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -726,7 +726,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -797,7 +797,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -815,7 +815,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -835,7 +835,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -853,7 +853,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1184,7 +1184,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1202,7 +1202,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1222,7 +1222,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1240,7 +1240,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1311,7 +1311,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1329,7 +1329,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1349,7 +1349,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1367,7 +1367,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1438,7 +1438,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1456,7 +1456,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1476,7 +1476,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1494,7 +1494,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1565,7 +1565,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1583,7 +1583,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1603,7 +1603,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1621,7 +1621,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1692,7 +1692,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1710,7 +1710,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1730,7 +1730,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1748,7 +1748,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -1917,13 +1917,13 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string mPNField;
 
-        private byte numberOfItemsField;
+        private ulong numberOfItemsField;
 
         private string operatingSystemField;
 
         private ItemLookupResponseItemsItemItemAttributesPackageDimensions packageDimensionsField;
 
-        private byte packageQuantityField;
+        private ulong packageQuantityField;
 
         private string partNumberField;
 
@@ -2104,7 +2104,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public byte NumberOfItems
+        public ulong NumberOfItems
         {
             get
             {
@@ -2143,7 +2143,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public byte PackageQuantity
+        public ulong PackageQuantity
         {
             get
             {
@@ -2470,7 +2470,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2488,7 +2488,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -2508,7 +2508,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2526,7 +2526,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -2612,7 +2612,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2630,7 +2630,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
@@ -2688,7 +2688,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string unitsField;
 
-        private byte valueField;
+        private ulong valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2706,7 +2706,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
+        public ulong Value
         {
             get
             {
