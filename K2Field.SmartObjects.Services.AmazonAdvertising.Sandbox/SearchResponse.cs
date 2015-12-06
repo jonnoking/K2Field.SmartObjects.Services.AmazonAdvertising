@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace K2Field.SmartObjects.Services.AmazonAdvertising
+namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
 {
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01", IsNullable = false)]
-    public partial class ItemLookupResponse
+    public partial class ItemSearchResponse
     {
 
-        private ItemLookupResponseOperationRequest operationRequestField;
+        private ItemSearchResponseOperationRequest operationRequestField;
 
-        private ItemLookupResponseItems itemsField;
+        private ItemSearchResponseItems itemsField;
 
         /// <remarks/>
-        public ItemLookupResponseOperationRequest OperationRequest
+        public ItemSearchResponseOperationRequest OperationRequest
         {
             get
             {
@@ -31,7 +31,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItems Items
+        public ItemSearchResponseItems Items
         {
             get
             {
@@ -46,19 +46,19 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseOperationRequest
+    public partial class ItemSearchResponseOperationRequest
     {
 
-        private ItemLookupResponseOperationRequestHTTPHeaders hTTPHeadersField;
+        private ItemSearchResponseOperationRequestHTTPHeaders hTTPHeadersField;
 
         private string requestIdField;
 
-        private ItemLookupResponseOperationRequestArgument[] argumentsField;
+        private ItemSearchResponseOperationRequestArgument[] argumentsField;
 
         private decimal requestProcessingTimeField;
 
         /// <remarks/>
-        public ItemLookupResponseOperationRequestHTTPHeaders HTTPHeaders
+        public ItemSearchResponseOperationRequestHTTPHeaders HTTPHeaders
         {
             get
             {
@@ -85,7 +85,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Argument", IsNullable = false)]
-        public ItemLookupResponseOperationRequestArgument[] Arguments
+        public ItemSearchResponseOperationRequestArgument[] Arguments
         {
             get
             {
@@ -113,13 +113,13 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseOperationRequestHTTPHeaders
+    public partial class ItemSearchResponseOperationRequestHTTPHeaders
     {
 
-        private ItemLookupResponseOperationRequestHTTPHeadersHeader headerField;
+        private ItemSearchResponseOperationRequestHTTPHeadersHeader headerField;
 
         /// <remarks/>
-        public ItemLookupResponseOperationRequestHTTPHeadersHeader Header
+        public ItemSearchResponseOperationRequestHTTPHeadersHeader Header
         {
             get
             {
@@ -134,7 +134,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseOperationRequestHTTPHeadersHeader
+    public partial class ItemSearchResponseOperationRequestHTTPHeadersHeader
     {
 
         private string nameField;
@@ -172,7 +172,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseOperationRequestArgument
+    public partial class ItemSearchResponseOperationRequestArgument
     {
 
         private string nameField;
@@ -210,15 +210,21 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItems
+    public partial class ItemSearchResponseItems
     {
 
-        private ItemLookupResponseItemsRequest requestField;
+        private ItemSearchResponseItemsRequest requestField;
 
-        private ItemLookupResponseItemsItem itemField;
+        private uint totalResultsField;
+
+        private uint totalPagesField;
+
+        private object moreSearchResultsUrlField;
+
+        private ItemSearchResponseItemsItem[] itemField;
 
         /// <remarks/>
-        public ItemLookupResponseItemsRequest Request
+        public ItemSearchResponseItemsRequest Request
         {
             get
             {
@@ -231,7 +237,47 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItem Item
+        public uint TotalResults
+        {
+            get
+            {
+                return this.totalResultsField;
+            }
+            set
+            {
+                this.totalResultsField = value;
+            }
+        }
+
+        /// <remarks/>
+        public uint TotalPages
+        {
+            get
+            {
+                return this.totalPagesField;
+            }
+            set
+            {
+                this.totalPagesField = value;
+            }
+        }
+
+        /// <remarks/>
+        public object MoreSearchResultsUrl
+        {
+            get
+            {
+                return this.moreSearchResultsUrlField;
+            }
+            set
+            {
+                this.moreSearchResultsUrlField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Item")]
+        public ItemSearchResponseItemsItem[] Item
         {
             get
             {
@@ -246,14 +292,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsRequest
+    public partial class ItemSearchResponseItemsRequest
     {
 
         private string isValidField;
 
-        private ItemLookupResponseItemsRequestItemLookupRequest itemLookupRequestField;
-
-        private ItemLookupResponseItemsRequestErrors errorsField;
+        private ItemSearchResponseItemsRequestItemSearchRequest itemSearchRequestField;
 
         /// <remarks/>
         public string IsValid
@@ -269,70 +313,42 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsRequestItemLookupRequest ItemLookupRequest
+        public ItemSearchResponseItemsRequestItemSearchRequest ItemSearchRequest
         {
             get
             {
-                return this.itemLookupRequestField;
+                return this.itemSearchRequestField;
             }
             set
             {
-                this.itemLookupRequestField = value;
-            }
-        }
-
-        /// <remarks/>
-        public ItemLookupResponseItemsRequestErrors Errors
-        {
-            get
-            {
-                return this.errorsField;
-            }
-            set
-            {
-                this.errorsField = value;
+                this.itemSearchRequestField = value;
             }
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsRequestItemLookupRequest
+    public partial class ItemSearchResponseItemsRequestItemSearchRequest
     {
 
-        private string idTypeField;
-
-        private string itemIdField;
+        private string keywordsField;
 
         private string[] responseGroupField;
 
         private string searchIndexField;
 
-        private string variationPageField;
+        private bool includeReviewsSummaryField;
 
         /// <remarks/>
-        public string IdType
+        public string Keywords
         {
             get
             {
-                return this.idTypeField;
+                return this.keywordsField;
             }
             set
             {
-                this.idTypeField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string ItemId
-        {
-            get
-            {
-                return this.itemIdField;
-            }
-            set
-            {
-                this.itemIdField = value;
+                this.keywordsField = value;
             }
         }
 
@@ -364,79 +380,22 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public string VariationPage
+        public bool IncludeReviewsSummary
         {
             get
             {
-                return this.variationPageField;
+                return this.includeReviewsSummaryField;
             }
             set
             {
-                this.variationPageField = value;
+                this.includeReviewsSummaryField = value;
             }
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsRequestErrors
-    {
-
-        private ItemLookupResponseItemsRequestErrorsError errorField;
-
-        /// <remarks/>
-        public ItemLookupResponseItemsRequestErrorsError Error
-        {
-            get
-            {
-                return this.errorField;
-            }
-            set
-            {
-                this.errorField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsRequestErrorsError
-    {
-
-        private string codeField;
-
-        private string messageField;
-
-        /// <remarks/>
-        public string Code
-        {
-            get
-            {
-                return this.codeField;
-            }
-            set
-            {
-                this.codeField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string Message
-        {
-            get
-            {
-                return this.messageField;
-            }
-            set
-            {
-                this.messageField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItem
+    public partial class ItemSearchResponseItemsItem
     {
 
         private string aSINField;
@@ -445,21 +404,21 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string detailPageURLField;
 
-        private ItemLookupResponseItemsItemItemLink[] itemLinksField;
+        private ItemSearchResponseItemsItemItemLink[] itemLinksField;
 
-        private ItemLookupResponseItemsItemSmallImage smallImageField;
+        private ItemSearchResponseItemsItemSmallImage smallImageField;
 
-        private ItemLookupResponseItemsItemMediumImage mediumImageField;
+        private ItemSearchResponseItemsItemMediumImage mediumImageField;
 
-        private ItemLookupResponseItemsItemLargeImage largeImageField;
+        private ItemSearchResponseItemsItemLargeImage largeImageField;
 
-        private ItemLookupResponseItemsItemImageSets imageSetsField;
+        private ItemSearchResponseItemsItemImageSet[] imageSetsField;
 
-        private ItemLookupResponseItemsItemItemAttributes itemAttributesField;
+        private ItemSearchResponseItemsItemItemAttributes itemAttributesField;
 
-        private ItemLookupResponseItemsItemOfferSummary offerSummaryField;
+        private ItemSearchResponseItemsItemOfferSummary offerSummaryField;
 
-        private ItemLookupResponseItemsItemOffers offersField;
+        private ItemSearchResponseItemsItemOffers offersField;
 
         /// <remarks/>
         public string ASIN
@@ -502,7 +461,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("ItemLink", IsNullable = false)]
-        public ItemLookupResponseItemsItemItemLink[] ItemLinks
+        public ItemSearchResponseItemsItemItemLink[] ItemLinks
         {
             get
             {
@@ -515,7 +474,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemSmallImage SmallImage
+        public ItemSearchResponseItemsItemSmallImage SmallImage
         {
             get
             {
@@ -528,7 +487,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemMediumImage MediumImage
+        public ItemSearchResponseItemsItemMediumImage MediumImage
         {
             get
             {
@@ -541,7 +500,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemLargeImage LargeImage
+        public ItemSearchResponseItemsItemLargeImage LargeImage
         {
             get
             {
@@ -554,7 +513,8 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSets ImageSets
+        [System.Xml.Serialization.XmlArrayItemAttribute("ImageSet", IsNullable = false)]
+        public ItemSearchResponseItemsItemImageSet[] ImageSets
         {
             get
             {
@@ -567,7 +527,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributes ItemAttributes
+        public ItemSearchResponseItemsItemItemAttributes ItemAttributes
         {
             get
             {
@@ -580,7 +540,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOfferSummary OfferSummary
+        public ItemSearchResponseItemsItemOfferSummary OfferSummary
         {
             get
             {
@@ -593,7 +553,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOffers Offers
+        public ItemSearchResponseItemsItemOffers Offers
         {
             get
             {
@@ -608,7 +568,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemLink
+    public partial class ItemSearchResponseItemsItemItemLink
     {
 
         private string descriptionField;
@@ -644,14 +604,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemSmallImage
+    public partial class ItemSearchResponseItemsItemSmallImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemSmallImageHeight heightField;
+        private ItemSearchResponseItemsItemSmallImageHeight heightField;
 
-        private ItemLookupResponseItemsItemSmallImageWidth widthField;
+        private ItemSearchResponseItemsItemSmallImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -667,7 +627,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemSmallImageHeight Height
+        public ItemSearchResponseItemsItemSmallImageHeight Height
         {
             get
             {
@@ -680,7 +640,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemSmallImageWidth Width
+        public ItemSearchResponseItemsItemSmallImageWidth Width
         {
             get
             {
@@ -695,12 +655,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemSmallImageHeight
+    public partial class ItemSearchResponseItemsItemSmallImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -718,7 +678,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -733,12 +693,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemSmallImageWidth
+    public partial class ItemSearchResponseItemsItemSmallImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -756,7 +716,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -771,14 +731,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemMediumImage
+    public partial class ItemSearchResponseItemsItemMediumImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemMediumImageHeight heightField;
+        private ItemSearchResponseItemsItemMediumImageHeight heightField;
 
-        private ItemLookupResponseItemsItemMediumImageWidth widthField;
+        private ItemSearchResponseItemsItemMediumImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -794,7 +754,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemMediumImageHeight Height
+        public ItemSearchResponseItemsItemMediumImageHeight Height
         {
             get
             {
@@ -807,7 +767,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemMediumImageWidth Width
+        public ItemSearchResponseItemsItemMediumImageWidth Width
         {
             get
             {
@@ -822,12 +782,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemMediumImageHeight
+    public partial class ItemSearchResponseItemsItemMediumImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -845,7 +805,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -860,12 +820,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemMediumImageWidth
+    public partial class ItemSearchResponseItemsItemMediumImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -883,7 +843,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -898,14 +858,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemLargeImage
+    public partial class ItemSearchResponseItemsItemLargeImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemLargeImageHeight heightField;
+        private ItemSearchResponseItemsItemLargeImageHeight heightField;
 
-        private ItemLookupResponseItemsItemLargeImageWidth widthField;
+        private ItemSearchResponseItemsItemLargeImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -921,7 +881,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemLargeImageHeight Height
+        public ItemSearchResponseItemsItemLargeImageHeight Height
         {
             get
             {
@@ -934,7 +894,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemLargeImageWidth Width
+        public ItemSearchResponseItemsItemLargeImageWidth Width
         {
             get
             {
@@ -949,12 +909,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemLargeImageHeight
+    public partial class ItemSearchResponseItemsItemLargeImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private ushort valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -972,7 +932,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public ushort Value
         {
             get
             {
@@ -987,12 +947,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemLargeImageWidth
+    public partial class ItemSearchResponseItemsItemLargeImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private ushort valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1010,7 +970,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public ushort Value
         {
             get
             {
@@ -1025,46 +985,25 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSets
+    public partial class ItemSearchResponseItemsItemImageSet
     {
 
-        private ItemLookupResponseItemsItemImageSetsImageSet imageSetField;
+        private ItemSearchResponseItemsItemImageSetSwatchImage swatchImageField;
 
-        /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSet ImageSet
-        {
-            get
-            {
-                return this.imageSetField;
-            }
-            set
-            {
-                this.imageSetField = value;
-            }
-        }
-    }
+        private ItemSearchResponseItemsItemImageSetSmallImage smallImageField;
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSet
-    {
+        private ItemSearchResponseItemsItemImageSetThumbnailImage thumbnailImageField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetSwatchImage swatchImageField;
+        private ItemSearchResponseItemsItemImageSetTinyImage tinyImageField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetSmallImage smallImageField;
+        private ItemSearchResponseItemsItemImageSetMediumImage mediumImageField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetThumbnailImage thumbnailImageField;
-
-        private ItemLookupResponseItemsItemImageSetsImageSetTinyImage tinyImageField;
-
-        private ItemLookupResponseItemsItemImageSetsImageSetMediumImage mediumImageField;
-
-        private ItemLookupResponseItemsItemImageSetsImageSetLargeImage largeImageField;
+        private ItemSearchResponseItemsItemImageSetLargeImage largeImageField;
 
         private string categoryField;
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetSwatchImage SwatchImage
+        public ItemSearchResponseItemsItemImageSetSwatchImage SwatchImage
         {
             get
             {
@@ -1077,7 +1016,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetSmallImage SmallImage
+        public ItemSearchResponseItemsItemImageSetSmallImage SmallImage
         {
             get
             {
@@ -1090,7 +1029,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetThumbnailImage ThumbnailImage
+        public ItemSearchResponseItemsItemImageSetThumbnailImage ThumbnailImage
         {
             get
             {
@@ -1103,7 +1042,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetTinyImage TinyImage
+        public ItemSearchResponseItemsItemImageSetTinyImage TinyImage
         {
             get
             {
@@ -1116,7 +1055,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetMediumImage MediumImage
+        public ItemSearchResponseItemsItemImageSetMediumImage MediumImage
         {
             get
             {
@@ -1129,7 +1068,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetLargeImage LargeImage
+        public ItemSearchResponseItemsItemImageSetLargeImage LargeImage
         {
             get
             {
@@ -1158,14 +1097,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetSwatchImage
+    public partial class ItemSearchResponseItemsItemImageSetSwatchImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetSwatchImageHeight heightField;
+        private ItemSearchResponseItemsItemImageSetSwatchImageHeight heightField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetSwatchImageWidth widthField;
+        private ItemSearchResponseItemsItemImageSetSwatchImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -1181,7 +1120,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetSwatchImageHeight Height
+        public ItemSearchResponseItemsItemImageSetSwatchImageHeight Height
         {
             get
             {
@@ -1194,7 +1133,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetSwatchImageWidth Width
+        public ItemSearchResponseItemsItemImageSetSwatchImageWidth Width
         {
             get
             {
@@ -1209,12 +1148,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetSwatchImageHeight
+    public partial class ItemSearchResponseItemsItemImageSetSwatchImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1232,7 +1171,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1247,12 +1186,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetSwatchImageWidth
+    public partial class ItemSearchResponseItemsItemImageSetSwatchImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1270,7 +1209,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1285,14 +1224,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetSmallImage
+    public partial class ItemSearchResponseItemsItemImageSetSmallImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetSmallImageHeight heightField;
+        private ItemSearchResponseItemsItemImageSetSmallImageHeight heightField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetSmallImageWidth widthField;
+        private ItemSearchResponseItemsItemImageSetSmallImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -1308,7 +1247,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetSmallImageHeight Height
+        public ItemSearchResponseItemsItemImageSetSmallImageHeight Height
         {
             get
             {
@@ -1321,7 +1260,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetSmallImageWidth Width
+        public ItemSearchResponseItemsItemImageSetSmallImageWidth Width
         {
             get
             {
@@ -1336,12 +1275,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetSmallImageHeight
+    public partial class ItemSearchResponseItemsItemImageSetSmallImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1359,7 +1298,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1374,12 +1313,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetSmallImageWidth
+    public partial class ItemSearchResponseItemsItemImageSetSmallImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1397,7 +1336,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1412,14 +1351,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetThumbnailImage
+    public partial class ItemSearchResponseItemsItemImageSetThumbnailImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetThumbnailImageHeight heightField;
+        private ItemSearchResponseItemsItemImageSetThumbnailImageHeight heightField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetThumbnailImageWidth widthField;
+        private ItemSearchResponseItemsItemImageSetThumbnailImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -1435,7 +1374,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetThumbnailImageHeight Height
+        public ItemSearchResponseItemsItemImageSetThumbnailImageHeight Height
         {
             get
             {
@@ -1448,7 +1387,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetThumbnailImageWidth Width
+        public ItemSearchResponseItemsItemImageSetThumbnailImageWidth Width
         {
             get
             {
@@ -1463,12 +1402,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetThumbnailImageHeight
+    public partial class ItemSearchResponseItemsItemImageSetThumbnailImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1486,7 +1425,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1501,12 +1440,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetThumbnailImageWidth
+    public partial class ItemSearchResponseItemsItemImageSetThumbnailImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1524,7 +1463,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1539,14 +1478,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetTinyImage
+    public partial class ItemSearchResponseItemsItemImageSetTinyImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetTinyImageHeight heightField;
+        private ItemSearchResponseItemsItemImageSetTinyImageHeight heightField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetTinyImageWidth widthField;
+        private ItemSearchResponseItemsItemImageSetTinyImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -1562,7 +1501,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetTinyImageHeight Height
+        public ItemSearchResponseItemsItemImageSetTinyImageHeight Height
         {
             get
             {
@@ -1575,7 +1514,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetTinyImageWidth Width
+        public ItemSearchResponseItemsItemImageSetTinyImageWidth Width
         {
             get
             {
@@ -1590,12 +1529,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetTinyImageHeight
+    public partial class ItemSearchResponseItemsItemImageSetTinyImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1613,7 +1552,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1628,12 +1567,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetTinyImageWidth
+    public partial class ItemSearchResponseItemsItemImageSetTinyImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1651,7 +1590,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1666,14 +1605,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetMediumImage
+    public partial class ItemSearchResponseItemsItemImageSetMediumImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetMediumImageHeight heightField;
+        private ItemSearchResponseItemsItemImageSetMediumImageHeight heightField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetMediumImageWidth widthField;
+        private ItemSearchResponseItemsItemImageSetMediumImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -1689,7 +1628,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetMediumImageHeight Height
+        public ItemSearchResponseItemsItemImageSetMediumImageHeight Height
         {
             get
             {
@@ -1702,7 +1641,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetMediumImageWidth Width
+        public ItemSearchResponseItemsItemImageSetMediumImageWidth Width
         {
             get
             {
@@ -1717,12 +1656,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetMediumImageHeight
+    public partial class ItemSearchResponseItemsItemImageSetMediumImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1740,7 +1679,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1755,12 +1694,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetMediumImageWidth
+    public partial class ItemSearchResponseItemsItemImageSetMediumImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1778,7 +1717,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -1793,14 +1732,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetLargeImage
+    public partial class ItemSearchResponseItemsItemImageSetLargeImage
     {
 
         private string uRLField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetLargeImageHeight heightField;
+        private ItemSearchResponseItemsItemImageSetLargeImageHeight heightField;
 
-        private ItemLookupResponseItemsItemImageSetsImageSetLargeImageWidth widthField;
+        private ItemSearchResponseItemsItemImageSetLargeImageWidth widthField;
 
         /// <remarks/>
         public string URL
@@ -1816,7 +1755,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetLargeImageHeight Height
+        public ItemSearchResponseItemsItemImageSetLargeImageHeight Height
         {
             get
             {
@@ -1829,7 +1768,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemImageSetsImageSetLargeImageWidth Width
+        public ItemSearchResponseItemsItemImageSetLargeImageWidth Width
         {
             get
             {
@@ -1844,12 +1783,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetLargeImageHeight
+    public partial class ItemSearchResponseItemsItemImageSetLargeImageHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private ushort valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1867,7 +1806,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public ushort Value
         {
             get
             {
@@ -1882,12 +1821,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemImageSetsImageSetLargeImageWidth
+    public partial class ItemSearchResponseItemsItemImageSetLargeImageWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private ushort valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1905,7 +1844,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public ushort Value
         {
             get
             {
@@ -1920,12 +1859,16 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributes
+    public partial class ItemSearchResponseItemsItemItemAttributes
     {
+
+        private string aspectRatioField;
 
         private string bindingField;
 
         private string brandField;
+
+        private string[] catalogNumberListField;
 
         private string colorField;
 
@@ -1933,17 +1876,35 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private ulong eANField;
 
-        private ItemLookupResponseItemsItemItemAttributesEANList eANListField;
-
-        private ItemLookupResponseItemsItemItemAttributesItemDimensions itemDimensionsField;
-
-        private string labelField;
+        private ulong[] eANListField;
 
         private string[] featureField;
 
-        private string manufacturerField;
+        private byte isAdultProductField;
 
-        private ItemLookupResponseItemsItemItemAttributesListPrice listPriceField;
+        private bool isAdultProductFieldSpecified;
+
+        private string hazardousMaterialTypeField;
+
+        private byte isAutographedField;
+
+        private bool isAutographedFieldSpecified;
+
+        private byte isMemorabiliaField;
+
+        private bool isMemorabiliaFieldSpecified;
+
+        private ItemSearchResponseItemsItemItemAttributesItemDimensions itemDimensionsField;
+
+        private string labelField;
+
+        private ItemSearchResponseItemsItemItemAttributesLanguages languagesField;
+
+        private string legalDisclaimerField;
+
+        private ItemSearchResponseItemsItemItemAttributesListPrice listPriceField;
+
+        private string manufacturerField;
 
         private string mediaTypeField;
 
@@ -1951,13 +1912,15 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private string mPNField;
 
-        private ulong numberOfItemsField;
+        private byte numberOfItemsField;
+
+        private bool numberOfItemsFieldSpecified;
 
         private string operatingSystemField;
 
-        private ItemLookupResponseItemsItemItemAttributesPackageDimensions packageDimensionsField;
+        private ItemSearchResponseItemsItemItemAttributesPackageDimensions packageDimensionsField;
 
-        private ulong packageQuantityField;
+        private byte packageQuantityField;
 
         private string partNumberField;
 
@@ -1971,6 +1934,8 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private System.DateTime releaseDateField;
 
+        private bool releaseDateFieldSpecified;
+
         private string sizeField;
 
         private string studioField;
@@ -1979,7 +1944,24 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         private ulong uPCField;
 
-        private ItemLookupResponseItemsItemItemAttributesUPCList uPCListField;
+        private bool uPCFieldSpecified;
+
+        private ulong[] uPCListField;
+
+        private string warrantyField;
+
+        /// <remarks/>
+        public string AspectRatio
+        {
+            get
+            {
+                return this.aspectRatioField;
+            }
+            set
+            {
+                this.aspectRatioField = value;
+            }
+        }
 
         /// <remarks/>
         public string Binding
@@ -2004,6 +1986,20 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
             set
             {
                 this.brandField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("CatalogNumberListElement", IsNullable = false)]
+        public string[] CatalogNumberList
+        {
+            get
+            {
+                return this.catalogNumberListField;
+            }
+            set
+            {
+                this.catalogNumberListField = value;
             }
         }
 
@@ -2047,7 +2043,8 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesEANList EANList
+        [System.Xml.Serialization.XmlArrayItemAttribute("EANListElement", IsNullable = false)]
+        public ulong[] EANList
         {
             get
             {
@@ -2056,19 +2053,6 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
             set
             {
                 this.eANListField = value;
-            }
-        }
-
-        /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesItemDimensions ItemDimensions
-        {
-            get
-            {
-                return this.itemDimensionsField;
-            }
-            set
-            {
-                this.itemDimensionsField = value;
             }
         }
 
@@ -2087,6 +2071,113 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
+        public byte IsAdultProduct
+        {
+            get
+            {
+                return this.isAdultProductField;
+            }
+            set
+            {
+                this.isAdultProductField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsAdultProductSpecified
+        {
+            get
+            {
+                return this.isAdultProductFieldSpecified;
+            }
+            set
+            {
+                this.isAdultProductFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public string HazardousMaterialType
+        {
+            get
+            {
+                return this.hazardousMaterialTypeField;
+            }
+            set
+            {
+                this.hazardousMaterialTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte IsAutographed
+        {
+            get
+            {
+                return this.isAutographedField;
+            }
+            set
+            {
+                this.isAutographedField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsAutographedSpecified
+        {
+            get
+            {
+                return this.isAutographedFieldSpecified;
+            }
+            set
+            {
+                this.isAutographedFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte IsMemorabilia
+        {
+            get
+            {
+                return this.isMemorabiliaField;
+            }
+            set
+            {
+                this.isMemorabiliaField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsMemorabiliaSpecified
+        {
+            get
+            {
+                return this.isMemorabiliaFieldSpecified;
+            }
+            set
+            {
+                this.isMemorabiliaFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemSearchResponseItemsItemItemAttributesItemDimensions ItemDimensions
+        {
+            get
+            {
+                return this.itemDimensionsField;
+            }
+            set
+            {
+                this.itemDimensionsField = value;
+            }
+        }
+
+        /// <remarks/>
         public string Label
         {
             get
@@ -2100,7 +2191,33 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesListPrice ListPrice
+        public ItemSearchResponseItemsItemItemAttributesLanguages Languages
+        {
+            get
+            {
+                return this.languagesField;
+            }
+            set
+            {
+                this.languagesField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string LegalDisclaimer
+        {
+            get
+            {
+                return this.legalDisclaimerField;
+            }
+            set
+            {
+                this.legalDisclaimerField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemSearchResponseItemsItemItemAttributesListPrice ListPrice
         {
             get
             {
@@ -2111,6 +2228,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
                 this.listPriceField = value;
             }
         }
+
         /// <remarks/>
         public string Manufacturer
         {
@@ -2164,7 +2282,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong NumberOfItems
+        public byte NumberOfItems
         {
             get
             {
@@ -2173,6 +2291,20 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
             set
             {
                 this.numberOfItemsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NumberOfItemsSpecified
+        {
+            get
+            {
+                return this.numberOfItemsFieldSpecified;
+            }
+            set
+            {
+                this.numberOfItemsFieldSpecified = value;
             }
         }
 
@@ -2190,7 +2322,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesPackageDimensions PackageDimensions
+        public ItemSearchResponseItemsItemItemAttributesPackageDimensions PackageDimensions
         {
             get
             {
@@ -2203,7 +2335,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong PackageQuantity
+        public byte PackageQuantity
         {
             get
             {
@@ -2295,6 +2427,20 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ReleaseDateSpecified
+        {
+            get
+            {
+                return this.releaseDateFieldSpecified;
+            }
+            set
+            {
+                this.releaseDateFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
         public string Size
         {
             get
@@ -2347,7 +2493,22 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesUPCList UPCList
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool UPCSpecified
+        {
+            get
+            {
+                return this.uPCFieldSpecified;
+            }
+            set
+            {
+                this.uPCFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("UPCListElement", IsNullable = false)]
+        public ulong[] UPCList
         {
             get
             {
@@ -2358,21 +2519,309 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
                 this.uPCListField = value;
             }
         }
+
+        /// <remarks/>
+        public string Warranty
+        {
+            get
+            {
+                return this.warrantyField;
+            }
+            set
+            {
+                this.warrantyField = value;
+            }
+        }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesListPrice
+    public partial class ItemSearchResponseItemsItemItemAttributesItemDimensions
     {
 
-        private ulong amountField;
+        private ItemSearchResponseItemsItemItemAttributesItemDimensionsHeight heightField;
+
+        private ItemSearchResponseItemsItemItemAttributesItemDimensionsLength lengthField;
+
+        private ItemSearchResponseItemsItemItemAttributesItemDimensionsWeight weightField;
+
+        private ItemSearchResponseItemsItemItemAttributesItemDimensionsWidth widthField;
+
+        /// <remarks/>
+        public ItemSearchResponseItemsItemItemAttributesItemDimensionsHeight Height
+        {
+            get
+            {
+                return this.heightField;
+            }
+            set
+            {
+                this.heightField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemSearchResponseItemsItemItemAttributesItemDimensionsLength Length
+        {
+            get
+            {
+                return this.lengthField;
+            }
+            set
+            {
+                this.lengthField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemSearchResponseItemsItemItemAttributesItemDimensionsWeight Weight
+        {
+            get
+            {
+                return this.weightField;
+            }
+            set
+            {
+                this.weightField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemSearchResponseItemsItemItemAttributesItemDimensionsWidth Width
+        {
+            get
+            {
+                return this.widthField;
+            }
+            set
+            {
+                this.widthField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemItemAttributesItemDimensionsHeight
+    {
+
+        private string unitsField;
+
+        private ushort valueField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Units
+        {
+            get
+            {
+                return this.unitsField;
+            }
+            set
+            {
+                this.unitsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public ushort Value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemItemAttributesItemDimensionsLength
+    {
+
+        private string unitsField;
+
+        private ushort valueField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Units
+        {
+            get
+            {
+                return this.unitsField;
+            }
+            set
+            {
+                this.unitsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public ushort Value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemItemAttributesItemDimensionsWeight
+    {
+
+        private string unitsField;
+
+        private byte valueField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Units
+        {
+            get
+            {
+                return this.unitsField;
+            }
+            set
+            {
+                this.unitsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public byte Value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemItemAttributesItemDimensionsWidth
+    {
+
+        private string unitsField;
+
+        private ushort valueField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Units
+        {
+            get
+            {
+                return this.unitsField;
+            }
+            set
+            {
+                this.unitsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public ushort Value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemItemAttributesLanguages
+    {
+
+        private ItemSearchResponseItemsItemItemAttributesLanguagesLanguage languageField;
+
+        /// <remarks/>
+        public ItemSearchResponseItemsItemItemAttributesLanguagesLanguage Language
+        {
+            get
+            {
+                return this.languageField;
+            }
+            set
+            {
+                this.languageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemItemAttributesLanguagesLanguage
+    {
+
+        private string nameField;
+
+        private string typeField;
+
+        /// <remarks/>
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string Type
+        {
+            get
+            {
+                return this.typeField;
+            }
+            set
+            {
+                this.typeField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemItemAttributesListPrice
+    {
+
+        private uint amountField;
 
         private string currencyCodeField;
 
         private string formattedPriceField;
 
         /// <remarks/>
-        public ulong Amount
+        public uint Amount
         {
             get
             {
@@ -2413,40 +2862,19 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesEANList
+    public partial class ItemSearchResponseItemsItemItemAttributesPackageDimensions
     {
 
-        private ulong eANListElementField;
+        private ItemSearchResponseItemsItemItemAttributesPackageDimensionsHeight heightField;
+
+        private ItemSearchResponseItemsItemItemAttributesPackageDimensionsLength lengthField;
+
+        private ItemSearchResponseItemsItemItemAttributesPackageDimensionsWeight weightField;
+
+        private ItemSearchResponseItemsItemItemAttributesPackageDimensionsWidth widthField;
 
         /// <remarks/>
-        public ulong EANListElement
-        {
-            get
-            {
-                return this.eANListElementField;
-            }
-            set
-            {
-                this.eANListElementField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesItemDimensions
-    {
-
-        private ItemLookupResponseItemsItemItemAttributesItemDimensionsHeight heightField;
-
-        private ItemLookupResponseItemsItemItemAttributesItemDimensionsLength lengthField;
-
-        private ItemLookupResponseItemsItemItemAttributesItemDimensionsWeight weightField;
-
-        private ItemLookupResponseItemsItemItemAttributesItemDimensionsWidth widthField;
-
-        /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesItemDimensionsHeight Height
+        public ItemSearchResponseItemsItemItemAttributesPackageDimensionsHeight Height
         {
             get
             {
@@ -2459,7 +2887,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesItemDimensionsLength Length
+        public ItemSearchResponseItemsItemItemAttributesPackageDimensionsLength Length
         {
             get
             {
@@ -2472,7 +2900,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesItemDimensionsWeight Weight
+        public ItemSearchResponseItemsItemItemAttributesPackageDimensionsWeight Weight
         {
             get
             {
@@ -2485,7 +2913,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesItemDimensionsWidth Width
+        public ItemSearchResponseItemsItemItemAttributesPackageDimensionsWidth Width
         {
             get
             {
@@ -2500,12 +2928,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesItemDimensionsHeight
+    public partial class ItemSearchResponseItemsItemItemAttributesPackageDimensionsHeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private ushort valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2523,7 +2951,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public ushort Value
         {
             get
             {
@@ -2538,12 +2966,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesItemDimensionsLength
+    public partial class ItemSearchResponseItemsItemItemAttributesPackageDimensionsLength
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private ushort valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2561,7 +2989,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public ushort Value
         {
             get
             {
@@ -2576,12 +3004,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesItemDimensionsWeight
+    public partial class ItemSearchResponseItemsItemItemAttributesPackageDimensionsWeight
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private byte valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2599,7 +3027,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public byte Value
         {
             get
             {
@@ -2614,12 +3042,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesItemDimensionsWidth
+    public partial class ItemSearchResponseItemsItemItemAttributesPackageDimensionsWidth
     {
 
         private string unitsField;
 
-        private ulong valueField;
+        private ushort valueField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -2637,7 +3065,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
+        public ushort Value
         {
             get
             {
@@ -2652,262 +3080,25 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesPackageDimensions
+    public partial class ItemSearchResponseItemsItemOfferSummary
     {
 
-        private ItemLookupResponseItemsItemItemAttributesPackageDimensionsHeight heightField;
+        private ItemSearchResponseItemsItemOfferSummaryLowestNewPrice lowestNewPriceField;
 
-        private ItemLookupResponseItemsItemItemAttributesPackageDimensionsLength lengthField;
+        private ItemSearchResponseItemsItemOfferSummaryLowestUsedPrice lowestUsedPriceField;
 
-        private ItemLookupResponseItemsItemItemAttributesPackageDimensionsWeight weightField;
+        private ItemSearchResponseItemsItemOfferSummaryLowestRefurbishedPrice lowestRefurbishedPriceField;
 
-        private ItemLookupResponseItemsItemItemAttributesPackageDimensionsWidth widthField;
+        private byte totalNewField;
 
-        /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesPackageDimensionsHeight Height
-        {
-            get
-            {
-                return this.heightField;
-            }
-            set
-            {
-                this.heightField = value;
-            }
-        }
+        private byte totalUsedField;
+
+        private byte totalCollectibleField;
+
+        private byte totalRefurbishedField;
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesPackageDimensionsLength Length
-        {
-            get
-            {
-                return this.lengthField;
-            }
-            set
-            {
-                this.lengthField = value;
-            }
-        }
-
-        /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesPackageDimensionsWeight Weight
-        {
-            get
-            {
-                return this.weightField;
-            }
-            set
-            {
-                this.weightField = value;
-            }
-        }
-
-        /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesPackageDimensionsWidth Width
-        {
-            get
-            {
-                return this.widthField;
-            }
-            set
-            {
-                this.widthField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesPackageDimensionsHeight
-    {
-
-        private string unitsField;
-
-        private ulong valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Units
-        {
-            get
-            {
-                return this.unitsField;
-            }
-            set
-            {
-                this.unitsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesPackageDimensionsLength
-    {
-
-        private string unitsField;
-
-        private ulong valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Units
-        {
-            get
-            {
-                return this.unitsField;
-            }
-            set
-            {
-                this.unitsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesPackageDimensionsWeight
-    {
-
-        private string unitsField;
-
-        private ulong valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Units
-        {
-            get
-            {
-                return this.unitsField;
-            }
-            set
-            {
-                this.unitsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesPackageDimensionsWidth
-    {
-
-        private string unitsField;
-
-        private ulong valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Units
-        {
-            get
-            {
-                return this.unitsField;
-            }
-            set
-            {
-                this.unitsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public ulong Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesUPCList
-    {
-
-        private ulong uPCListElementField;
-
-        /// <remarks/>
-        public ulong UPCListElement
-        {
-            get
-            {
-                return this.uPCListElementField;
-            }
-            set
-            {
-                this.uPCListElementField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOfferSummary
-    {
-
-        private ItemLookupResponseItemsItemOfferSummaryLowestNewPrice lowestNewPriceField;
-
-        private ItemLookupResponseItemsItemOfferSummaryLowestUsedPrice lowestUsedPriceField;
-
-        private ulong totalNewField;
-
-        private ulong totalUsedField;
-
-        private ulong totalCollectibleField;
-
-        private ulong totalRefurbishedField;
-
-        /// <remarks/>
-        public ItemLookupResponseItemsItemOfferSummaryLowestNewPrice LowestNewPrice
+        public ItemSearchResponseItemsItemOfferSummaryLowestNewPrice LowestNewPrice
         {
             get
             {
@@ -2920,7 +3111,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOfferSummaryLowestUsedPrice LowestUsedPrice
+        public ItemSearchResponseItemsItemOfferSummaryLowestUsedPrice LowestUsedPrice
         {
             get
             {
@@ -2933,7 +3124,20 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong TotalNew
+        public ItemSearchResponseItemsItemOfferSummaryLowestRefurbishedPrice LowestRefurbishedPrice
+        {
+            get
+            {
+                return this.lowestRefurbishedPriceField;
+            }
+            set
+            {
+                this.lowestRefurbishedPriceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte TotalNew
         {
             get
             {
@@ -2946,7 +3150,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong TotalUsed
+        public byte TotalUsed
         {
             get
             {
@@ -2959,7 +3163,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong TotalCollectible
+        public byte TotalCollectible
         {
             get
             {
@@ -2972,7 +3176,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong TotalRefurbished
+        public byte TotalRefurbished
         {
             get
             {
@@ -2987,17 +3191,17 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOfferSummaryLowestNewPrice
+    public partial class ItemSearchResponseItemsItemOfferSummaryLowestNewPrice
     {
 
-        private ulong amountField;
+        private ushort amountField;
 
         private string currencyCodeField;
 
         private string formattedPriceField;
 
         /// <remarks/>
-        public ulong Amount
+        public ushort Amount
         {
             get
             {
@@ -3038,17 +3242,17 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOfferSummaryLowestUsedPrice
+    public partial class ItemSearchResponseItemsItemOfferSummaryLowestUsedPrice
     {
 
-        private ulong amountField;
+        private ushort amountField;
 
         private string currencyCodeField;
 
         private string formattedPriceField;
 
         /// <remarks/>
-        public ulong Amount
+        public ushort Amount
         {
             get
             {
@@ -3089,19 +3293,70 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOffers
+    public partial class ItemSearchResponseItemsItemOfferSummaryLowestRefurbishedPrice
     {
 
-        private ulong totalOffersField;
+        private ushort amountField;
 
-        private ulong totalOfferPagesField;
+        private string currencyCodeField;
+
+        private string formattedPriceField;
+
+        /// <remarks/>
+        public ushort Amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string CurrencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string FormattedPrice
+        {
+            get
+            {
+                return this.formattedPriceField;
+            }
+            set
+            {
+                this.formattedPriceField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemSearchResponseItemsItemOffers
+    {
+
+        private byte totalOffersField;
+
+        private byte totalOfferPagesField;
 
         private string moreOffersUrlField;
 
-        private ItemLookupResponseItemsItemOffersOffer offerField;
+        private ItemSearchResponseItemsItemOffersOffer offerField;
 
         /// <remarks/>
-        public ulong TotalOffers
+        public byte TotalOffers
         {
             get
             {
@@ -3114,7 +3369,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong TotalOfferPages
+        public byte TotalOfferPages
         {
             get
             {
@@ -3140,7 +3395,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOffersOffer Offer
+        public ItemSearchResponseItemsItemOffersOffer Offer
         {
             get
             {
@@ -3155,15 +3410,15 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOffersOffer
+    public partial class ItemSearchResponseItemsItemOffersOffer
     {
 
-        private ItemLookupResponseItemsItemOffersOfferOfferAttributes offerAttributesField;
+        private ItemSearchResponseItemsItemOffersOfferOfferAttributes offerAttributesField;
 
-        private ItemLookupResponseItemsItemOffersOfferOfferListing offerListingField;
+        private ItemSearchResponseItemsItemOffersOfferOfferListing offerListingField;
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOffersOfferOfferAttributes OfferAttributes
+        public ItemSearchResponseItemsItemOffersOfferOfferAttributes OfferAttributes
         {
             get
             {
@@ -3176,7 +3431,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOffersOfferOfferListing OfferListing
+        public ItemSearchResponseItemsItemOffersOfferOfferListing OfferListing
         {
             get
             {
@@ -3191,7 +3446,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOffersOfferOfferAttributes
+    public partial class ItemSearchResponseItemsItemOffersOfferOfferAttributes
     {
 
         private string conditionField;
@@ -3212,24 +3467,26 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOffersOfferOfferListing
+    public partial class ItemSearchResponseItemsItemOffersOfferOfferListing
     {
 
         private string offerListingIdField;
 
-        private ItemLookupResponseItemsItemOffersOfferOfferListingPrice priceField;
+        private ItemSearchResponseItemsItemOffersOfferOfferListingPrice priceField;
 
-        private ItemLookupResponseItemsItemOffersOfferOfferListingAmountSaved amountSavedField;
+        private ItemSearchResponseItemsItemOffersOfferOfferListingAmountSaved amountSavedField;
 
-        private ulong percentageSavedField;
+        private byte percentageSavedField;
+
+        private bool percentageSavedFieldSpecified;
 
         private string availabilityField;
 
-        private ItemLookupResponseItemsItemOffersOfferOfferListingAvailabilityAttributes availabilityAttributesField;
+        private ItemSearchResponseItemsItemOffersOfferOfferListingAvailabilityAttributes availabilityAttributesField;
 
-        private ulong isEligibleForSuperSaverShippingField;
+        private byte isEligibleForSuperSaverShippingField;
 
-        private ulong isEligibleForPrimeField;
+        private byte isEligibleForPrimeField;
 
         /// <remarks/>
         public string OfferListingId
@@ -3245,7 +3502,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOffersOfferOfferListingPrice Price
+        public ItemSearchResponseItemsItemOffersOfferOfferListingPrice Price
         {
             get
             {
@@ -3258,7 +3515,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOffersOfferOfferListingAmountSaved AmountSaved
+        public ItemSearchResponseItemsItemOffersOfferOfferListingAmountSaved AmountSaved
         {
             get
             {
@@ -3271,7 +3528,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong PercentageSaved
+        public byte PercentageSaved
         {
             get
             {
@@ -3280,6 +3537,20 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
             set
             {
                 this.percentageSavedField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PercentageSavedSpecified
+        {
+            get
+            {
+                return this.percentageSavedFieldSpecified;
+            }
+            set
+            {
+                this.percentageSavedFieldSpecified = value;
             }
         }
 
@@ -3297,7 +3568,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ItemLookupResponseItemsItemOffersOfferOfferListingAvailabilityAttributes AvailabilityAttributes
+        public ItemSearchResponseItemsItemOffersOfferOfferListingAvailabilityAttributes AvailabilityAttributes
         {
             get
             {
@@ -3310,7 +3581,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong IsEligibleForSuperSaverShipping
+        public byte IsEligibleForSuperSaverShipping
         {
             get
             {
@@ -3323,7 +3594,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong IsEligibleForPrime
+        public byte IsEligibleForPrime
         {
             get
             {
@@ -3338,17 +3609,17 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOffersOfferOfferListingPrice
+    public partial class ItemSearchResponseItemsItemOffersOfferOfferListingPrice
     {
 
-        private ulong amountField;
+        private ushort amountField;
 
         private string currencyCodeField;
 
         private string formattedPriceField;
 
         /// <remarks/>
-        public ulong Amount
+        public ushort Amount
         {
             get
             {
@@ -3389,17 +3660,17 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOffersOfferOfferListingAmountSaved
+    public partial class ItemSearchResponseItemsItemOffersOfferOfferListingAmountSaved
     {
 
-        private ulong amountField;
+        private ushort amountField;
 
         private string currencyCodeField;
 
         private string formattedPriceField;
 
         /// <remarks/>
-        public ulong Amount
+        public ushort Amount
         {
             get
             {
@@ -3440,14 +3711,14 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemOffersOfferOfferListingAvailabilityAttributes
+    public partial class ItemSearchResponseItemsItemOffersOfferOfferListingAvailabilityAttributes
     {
 
         private string availabilityTypeField;
 
-        private ulong minimumHoursField;
+        private byte minimumHoursField;
 
-        private ulong maximumHoursField;
+        private byte maximumHoursField;
 
         /// <remarks/>
         public string AvailabilityType
@@ -3463,7 +3734,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong MinimumHours
+        public byte MinimumHours
         {
             get
             {
@@ -3476,7 +3747,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
         }
 
         /// <remarks/>
-        public ulong MaximumHours
+        public byte MaximumHours
         {
             get
             {
@@ -3488,4 +3759,6 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
             }
         }
     }
+
+
 }

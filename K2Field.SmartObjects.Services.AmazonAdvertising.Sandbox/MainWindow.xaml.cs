@@ -29,9 +29,9 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
             InitializeComponent();
         }
 
-        private const string AWSAssociateTag = "nope";
-        private const string AWSAccessKeyId = "nope";
-        private const string AWSSecretKey = "nope";
+        private const string AWSAssociateTag = "jonnoking-21";
+        private const string AWSAccessKeyId = "AKIAIKFIJ445YDIFJITQ";
+        private const string AWSSecretKey = "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";
         private const string AWSMarketPlace = "webservices.amazon.co.uk";
 
         private const string NAMESPACE = "http://webservices.amazon.com/AWSECommerceService/2011-08-01";
@@ -39,35 +39,6 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
         private void btnLookupItem_Click(object sender, RoutedEventArgs e)
         {
         
-
-
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(@"c:\advertising.xml");
-            
-
-            //XmlElement xe = 
-            //xe.InnerXml = doc.OuterXml;
-
-            //XmlNamespaceManager nsmgr = new XmlNamespaceManager(xe.OwnerDocument.NameTable);
-            //nsmgr.AddNamespace("", xe.OwnerDocument.DocumentElement.NamespaceURI);
-
-
-
-
-            XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
-            nsmgr.AddNamespace("ns1", "http://webservices.amazon.com/AWSECommerceService/2011-08-01");
-            //xnm.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-            //xnm.AddNamespace("xsd", "http://www.w3.org/2001/XMLSchema");
-
-
-            XmlNode attributes = doc.SelectSingleNode("/ns1:ItemLookupResponse/ns1:Items/ns1:Item/ns1:ItemAttributes", nsmgr);
-
-
-            MessageBox.Show(attributes.ChildNodes.Count.ToString());
-
-            return;
-
 
             IDictionary<string, string> r1 = new Dictionary<string, String>();
             r1["Service"] = "AWSECommerceService";
@@ -93,11 +64,32 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
 
 
             String requestUrl;
-            String title;
             SignedRequestHelper helper = new SignedRequestHelper(AWSAccessKeyId, AWSSecretKey, AWSMarketPlace);
 
             requestUrl = helper.Sign(r2);
             var item = FetchTitle(requestUrl);
+        }
+
+        private static ItemSearchResponse FetchSearch(string url)
+        {
+            try
+            {
+                WebRequest request = HttpWebRequest.Create(url);
+                WebResponse response = request.GetResponse();
+                XmlDocument doc = new XmlDocument();
+
+                ItemSearchResponse item;
+
+                XmlSerializer xs = new XmlSerializer(typeof(ItemSearchResponse));
+                item = (ItemSearchResponse)xs.Deserialize(response.GetResponseStream());
+
+                return item;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.GetBaseException().Message);
+            }
+            return null;
         }
 
         private static ItemLookupResponse FetchTitle(string url)
@@ -140,6 +132,28 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
                 System.Console.WriteLine("Stack Trace: " + e.StackTrace);
             }
             return null;
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            IDictionary<string, string> r1 = new Dictionary<string, String>();
+            r1["Service"] = "AWSECommerceService";
+            //r1["Version"] = "2009-03-31";
+            r1["AssociateTag"] = AWSAssociateTag;
+            r1["Operation"] = "ItemSearch";
+            r1["SearchIndex"] = "All";
+            r1["Keywords"] = "iphone";
+            r1["ResponseGroup"] = "Images,ItemAttributes";
+
+            SignedRequestHelper helper = new SignedRequestHelper(AWSAccessKeyId, AWSSecretKey, AWSMarketPlace);
+
+            String requestUrl;
+
+            requestUrl = helper.Sign(r1);
+            var item = FetchSearch(requestUrl);
+
+            int i = 0;
+
         }
     }
 
@@ -422,15 +436,30 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
     public partial class ItemLookupResponseItemsRequestItemLookupRequest
     {
 
+        private string conditionField;
+
         private string idTypeField;
 
-        private ulong itemIdField;
+        private uint itemIdField;
 
         private string[] responseGroupField;
 
         private string searchIndexField;
 
         private string variationPageField;
+
+        /// <remarks/>
+        public string Condition
+        {
+            get
+            {
+                return this.conditionField;
+            }
+            set
+            {
+                this.conditionField = value;
+            }
+        }
 
         /// <remarks/>
         public string IdType
@@ -446,7 +475,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
         }
 
         /// <remarks/>
-        public ulong ItemId
+        public uint ItemId
         {
             get
             {
@@ -504,9 +533,7 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
     public partial class ItemLookupResponseItemsItem
     {
 
-        private string aSINField;
-
-        private string parentASINField;
+        private uint aSINField;
 
         private string detailPageURLField;
 
@@ -522,8 +549,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
 
         private ItemLookupResponseItemsItemItemAttributes itemAttributesField;
 
+        private ItemLookupResponseItemsItemOfferSummary offerSummaryField;
+
+        private ItemLookupResponseItemsItemOffers offersField;
+
         /// <remarks/>
-        public string ASIN
+        public uint ASIN
         {
             get
             {
@@ -532,19 +563,6 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
             set
             {
                 this.aSINField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string ParentASIN
-        {
-            get
-            {
-                return this.parentASINField;
-            }
-            set
-            {
-                this.parentASINField = value;
             }
         }
 
@@ -637,6 +655,32 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
             set
             {
                 this.itemAttributesField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOfferSummary OfferSummary
+        {
+            get
+            {
+                return this.offerSummaryField;
+            }
+            set
+            {
+                this.offerSummaryField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOffers Offers
+        {
+            get
+            {
+                return this.offersField;
+            }
+            set
+            {
+                this.offersField = value;
             }
         }
     }
@@ -1958,59 +2002,61 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
     public partial class ItemLookupResponseItemsItemItemAttributes
     {
 
+        private string[] authorField;
+
         private string bindingField;
 
         private string brandField;
 
-        private string colorField;
-
-        private string departmentField;
+        private string[] catalogNumberListField;
 
         private ulong eANField;
 
         private ItemLookupResponseItemsItemItemAttributesEANList eANListField;
 
+        private uint iSBNField;
+
         private ItemLookupResponseItemsItemItemAttributesItemDimensions itemDimensionsField;
 
         private string labelField;
 
+        private ItemLookupResponseItemsItemItemAttributesLanguage[] languagesField;
+
+        private ItemLookupResponseItemsItemItemAttributesListPrice listPriceField;
+
         private string manufacturerField;
 
-        private string mediaTypeField;
-
-        private string modelField;
-
-        private string mPNField;
-
-        private byte numberOfItemsField;
-
-        private string operatingSystemField;
+        private byte numberOfPagesField;
 
         private ItemLookupResponseItemsItemItemAttributesPackageDimensions packageDimensionsField;
-
-        private byte packageQuantityField;
-
-        private string partNumberField;
-
-        private string platformField;
 
         private string productGroupField;
 
         private string productTypeNameField;
 
+        private System.DateTime publicationDateField;
+
         private string publisherField;
 
         private System.DateTime releaseDateField;
-
-        private string sizeField;
 
         private string studioField;
 
         private string titleField;
 
-        private ulong uPCField;
-
-        private ItemLookupResponseItemsItemItemAttributesUPCList uPCListField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Author")]
+        public string[] Author
+        {
+            get
+            {
+                return this.authorField;
+            }
+            set
+            {
+                this.authorField = value;
+            }
+        }
 
         /// <remarks/>
         public string Binding
@@ -2039,28 +2085,16 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
         }
 
         /// <remarks/>
-        public string Color
+        [System.Xml.Serialization.XmlArrayItemAttribute("CatalogNumberListElement", IsNullable = false)]
+        public string[] CatalogNumberList
         {
             get
             {
-                return this.colorField;
+                return this.catalogNumberListField;
             }
             set
             {
-                this.colorField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string Department
-        {
-            get
-            {
-                return this.departmentField;
-            }
-            set
-            {
-                this.departmentField = value;
+                this.catalogNumberListField = value;
             }
         }
 
@@ -2091,6 +2125,19 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
         }
 
         /// <remarks/>
+        public uint ISBN
+        {
+            get
+            {
+                return this.iSBNField;
+            }
+            set
+            {
+                this.iSBNField = value;
+            }
+        }
+
+        /// <remarks/>
         public ItemLookupResponseItemsItemItemAttributesItemDimensions ItemDimensions
         {
             get
@@ -2117,6 +2164,33 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Language", IsNullable = false)]
+        public ItemLookupResponseItemsItemItemAttributesLanguage[] Languages
+        {
+            get
+            {
+                return this.languagesField;
+            }
+            set
+            {
+                this.languagesField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemItemAttributesListPrice ListPrice
+        {
+            get
+            {
+                return this.listPriceField;
+            }
+            set
+            {
+                this.listPriceField = value;
+            }
+        }
+
+        /// <remarks/>
         public string Manufacturer
         {
             get
@@ -2130,67 +2204,15 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
         }
 
         /// <remarks/>
-        public string MediaType
+        public byte NumberOfPages
         {
             get
             {
-                return this.mediaTypeField;
+                return this.numberOfPagesField;
             }
             set
             {
-                this.mediaTypeField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string Model
-        {
-            get
-            {
-                return this.modelField;
-            }
-            set
-            {
-                this.modelField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string MPN
-        {
-            get
-            {
-                return this.mPNField;
-            }
-            set
-            {
-                this.mPNField = value;
-            }
-        }
-
-        /// <remarks/>
-        public byte NumberOfItems
-        {
-            get
-            {
-                return this.numberOfItemsField;
-            }
-            set
-            {
-                this.numberOfItemsField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string OperatingSystem
-        {
-            get
-            {
-                return this.operatingSystemField;
-            }
-            set
-            {
-                this.operatingSystemField = value;
+                this.numberOfPagesField = value;
             }
         }
 
@@ -2204,45 +2226,6 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
             set
             {
                 this.packageDimensionsField = value;
-            }
-        }
-
-        /// <remarks/>
-        public byte PackageQuantity
-        {
-            get
-            {
-                return this.packageQuantityField;
-            }
-            set
-            {
-                this.packageQuantityField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string PartNumber
-        {
-            get
-            {
-                return this.partNumberField;
-            }
-            set
-            {
-                this.partNumberField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string Platform
-        {
-            get
-            {
-                return this.platformField;
-            }
-            set
-            {
-                this.platformField = value;
             }
         }
 
@@ -2269,6 +2252,20 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
             set
             {
                 this.productTypeNameField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+        public System.DateTime PublicationDate
+        {
+            get
+            {
+                return this.publicationDateField;
+            }
+            set
+            {
+                this.publicationDateField = value;
             }
         }
 
@@ -2300,19 +2297,6 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
         }
 
         /// <remarks/>
-        public string Size
-        {
-            get
-            {
-                return this.sizeField;
-            }
-            set
-            {
-                this.sizeField = value;
-            }
-        }
-
-        /// <remarks/>
         public string Studio
         {
             get
@@ -2335,32 +2319,6 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
             set
             {
                 this.titleField = value;
-            }
-        }
-
-        /// <remarks/>
-        public ulong UPC
-        {
-            get
-            {
-                return this.uPCField;
-            }
-            set
-            {
-                this.uPCField = value;
-            }
-        }
-
-        /// <remarks/>
-        public ItemLookupResponseItemsItemItemAttributesUPCList UPCList
-        {
-            get
-            {
-                return this.uPCListField;
-            }
-            set
-            {
-                this.uPCListField = value;
             }
         }
     }
@@ -2606,6 +2564,93 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemItemAttributesLanguage
+    {
+
+        private string nameField;
+
+        private string typeField;
+
+        /// <remarks/>
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string Type
+        {
+            get
+            {
+                return this.typeField;
+            }
+            set
+            {
+                this.typeField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemItemAttributesListPrice
+    {
+
+        private ushort amountField;
+
+        private string currencyCodeField;
+
+        private string formattedPriceField;
+
+        /// <remarks/>
+        public ushort Amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string CurrencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string FormattedPrice
+        {
+            get
+            {
+                return this.formattedPriceField;
+            }
+            set
+            {
+                this.formattedPriceField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
     public partial class ItemLookupResponseItemsItemItemAttributesPackageDimensions
     {
 
@@ -2824,25 +2869,603 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising.Sandbox
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
-    public partial class ItemLookupResponseItemsItemItemAttributesUPCList
+    public partial class ItemLookupResponseItemsItemOfferSummary
     {
 
-        private ulong uPCListElementField;
+        private ItemLookupResponseItemsItemOfferSummaryLowestNewPrice lowestNewPriceField;
+
+        private ItemLookupResponseItemsItemOfferSummaryLowestUsedPrice lowestUsedPriceField;
+
+        private byte totalNewField;
+
+        private byte totalUsedField;
+
+        private byte totalCollectibleField;
+
+        private byte totalRefurbishedField;
 
         /// <remarks/>
-        public ulong UPCListElement
+        public ItemLookupResponseItemsItemOfferSummaryLowestNewPrice LowestNewPrice
         {
             get
             {
-                return this.uPCListElementField;
+                return this.lowestNewPriceField;
             }
             set
             {
-                this.uPCListElementField = value;
+                this.lowestNewPriceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOfferSummaryLowestUsedPrice LowestUsedPrice
+        {
+            get
+            {
+                return this.lowestUsedPriceField;
+            }
+            set
+            {
+                this.lowestUsedPriceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte TotalNew
+        {
+            get
+            {
+                return this.totalNewField;
+            }
+            set
+            {
+                this.totalNewField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte TotalUsed
+        {
+            get
+            {
+                return this.totalUsedField;
+            }
+            set
+            {
+                this.totalUsedField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte TotalCollectible
+        {
+            get
+            {
+                return this.totalCollectibleField;
+            }
+            set
+            {
+                this.totalCollectibleField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte TotalRefurbished
+        {
+            get
+            {
+                return this.totalRefurbishedField;
+            }
+            set
+            {
+                this.totalRefurbishedField = value;
             }
         }
     }
 
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOfferSummaryLowestNewPrice
+    {
+
+        private byte amountField;
+
+        private string currencyCodeField;
+
+        private string formattedPriceField;
+
+        /// <remarks/>
+        public byte Amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string CurrencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string FormattedPrice
+        {
+            get
+            {
+                return this.formattedPriceField;
+            }
+            set
+            {
+                this.formattedPriceField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOfferSummaryLowestUsedPrice
+    {
+
+        private ushort amountField;
+
+        private string currencyCodeField;
+
+        private string formattedPriceField;
+
+        /// <remarks/>
+        public ushort Amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string CurrencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string FormattedPrice
+        {
+            get
+            {
+                return this.formattedPriceField;
+            }
+            set
+            {
+                this.formattedPriceField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOffers
+    {
+
+        private byte totalOffersField;
+
+        private byte totalOfferPagesField;
+
+        private string moreOffersUrlField;
+
+        private ItemLookupResponseItemsItemOffersOffer offerField;
+
+        /// <remarks/>
+        public byte TotalOffers
+        {
+            get
+            {
+                return this.totalOffersField;
+            }
+            set
+            {
+                this.totalOffersField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte TotalOfferPages
+        {
+            get
+            {
+                return this.totalOfferPagesField;
+            }
+            set
+            {
+                this.totalOfferPagesField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string MoreOffersUrl
+        {
+            get
+            {
+                return this.moreOffersUrlField;
+            }
+            set
+            {
+                this.moreOffersUrlField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOffersOffer Offer
+        {
+            get
+            {
+                return this.offerField;
+            }
+            set
+            {
+                this.offerField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOffersOffer
+    {
+
+        private ItemLookupResponseItemsItemOffersOfferOfferAttributes offerAttributesField;
+
+        private ItemLookupResponseItemsItemOffersOfferOfferListing offerListingField;
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOffersOfferOfferAttributes OfferAttributes
+        {
+            get
+            {
+                return this.offerAttributesField;
+            }
+            set
+            {
+                this.offerAttributesField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOffersOfferOfferListing OfferListing
+        {
+            get
+            {
+                return this.offerListingField;
+            }
+            set
+            {
+                this.offerListingField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOffersOfferOfferAttributes
+    {
+
+        private string conditionField;
+
+        /// <remarks/>
+        public string Condition
+        {
+            get
+            {
+                return this.conditionField;
+            }
+            set
+            {
+                this.conditionField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOffersOfferOfferListing
+    {
+
+        private string offerListingIdField;
+
+        private ItemLookupResponseItemsItemOffersOfferOfferListingPrice priceField;
+
+        private ItemLookupResponseItemsItemOffersOfferOfferListingAmountSaved amountSavedField;
+
+        private byte percentageSavedField;
+
+        private string availabilityField;
+
+        private ItemLookupResponseItemsItemOffersOfferOfferListingAvailabilityAttributes availabilityAttributesField;
+
+        private byte isEligibleForSuperSaverShippingField;
+
+        private byte isEligibleForPrimeField;
+
+        /// <remarks/>
+        public string OfferListingId
+        {
+            get
+            {
+                return this.offerListingIdField;
+            }
+            set
+            {
+                this.offerListingIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOffersOfferOfferListingPrice Price
+        {
+            get
+            {
+                return this.priceField;
+            }
+            set
+            {
+                this.priceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOffersOfferOfferListingAmountSaved AmountSaved
+        {
+            get
+            {
+                return this.amountSavedField;
+            }
+            set
+            {
+                this.amountSavedField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte PercentageSaved
+        {
+            get
+            {
+                return this.percentageSavedField;
+            }
+            set
+            {
+                this.percentageSavedField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string Availability
+        {
+            get
+            {
+                return this.availabilityField;
+            }
+            set
+            {
+                this.availabilityField = value;
+            }
+        }
+
+        /// <remarks/>
+        public ItemLookupResponseItemsItemOffersOfferOfferListingAvailabilityAttributes AvailabilityAttributes
+        {
+            get
+            {
+                return this.availabilityAttributesField;
+            }
+            set
+            {
+                this.availabilityAttributesField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte IsEligibleForSuperSaverShipping
+        {
+            get
+            {
+                return this.isEligibleForSuperSaverShippingField;
+            }
+            set
+            {
+                this.isEligibleForSuperSaverShippingField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte IsEligibleForPrime
+        {
+            get
+            {
+                return this.isEligibleForPrimeField;
+            }
+            set
+            {
+                this.isEligibleForPrimeField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOffersOfferOfferListingPrice
+    {
+
+        private byte amountField;
+
+        private string currencyCodeField;
+
+        private string formattedPriceField;
+
+        /// <remarks/>
+        public byte Amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string CurrencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string FormattedPrice
+        {
+            get
+            {
+                return this.formattedPriceField;
+            }
+            set
+            {
+                this.formattedPriceField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOffersOfferOfferListingAmountSaved
+    {
+
+        private ushort amountField;
+
+        private string currencyCodeField;
+
+        private string formattedPriceField;
+
+        /// <remarks/>
+        public ushort Amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string CurrencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string FormattedPrice
+        {
+            get
+            {
+                return this.formattedPriceField;
+            }
+            set
+            {
+                this.formattedPriceField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://webservices.amazon.com/AWSECommerceService/2011-08-01")]
+    public partial class ItemLookupResponseItemsItemOffersOfferOfferListingAvailabilityAttributes
+    {
+
+        private string availabilityTypeField;
+
+        private byte minimumHoursField;
+
+        private byte maximumHoursField;
+
+        /// <remarks/>
+        public string AvailabilityType
+        {
+            get
+            {
+                return this.availabilityTypeField;
+            }
+            set
+            {
+                this.availabilityTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte MinimumHours
+        {
+            get
+            {
+                return this.minimumHoursField;
+            }
+            set
+            {
+                this.minimumHoursField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte MaximumHours
+        {
+            get
+            {
+                return this.maximumHoursField;
+            }
+            set
+            {
+                this.maximumHoursField = value;
+            }
+        }
+    }
 
 
 }

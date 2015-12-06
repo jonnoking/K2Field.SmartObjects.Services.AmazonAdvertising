@@ -47,8 +47,11 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AmazonItemSearch.cs" />
+    <Compile Include="Attributes.cs" />
     <Compile Include="ItemLookupResponse.cs" />
     <Compile Include="AmazonItemLookup.cs" />
+    <Compile Include="ItemSearchResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBroker.cs" />
     <Compile Include="Settings.cs" />
