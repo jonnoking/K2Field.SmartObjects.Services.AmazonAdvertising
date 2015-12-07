@@ -355,7 +355,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
                     item.Manufacturer = response.Items.Item.ItemAttributes.Manufacturer != null ? response.Items.Item.ItemAttributes.Manufacturer : "";
                     item.ProductGroup = response.Items.Item.ItemAttributes.ProductGroup != null ? response.Items.Item.ItemAttributes.ProductGroup : "";
                     item.Title = response.Items.Item.ItemAttributes.Title != null ? response.Items.Item.ItemAttributes.Title : "";
-                    item.FeatureDescription = string.Join(" ", response.Items.Item.ItemAttributes.Feature);
+
+                    if (response.Items.Item.ItemAttributes.Feature != null && response.Items.Item.ItemAttributes.Feature.Count() > 0)
+                    {
+                        item.FeatureDescription = string.Join(" ", response.Items.Item.ItemAttributes.Feature);
+                    }
+
                     item.ProductType = response.Items.Item.ItemAttributes.ProductTypeName;
                     item.UPC = Convert.ToInt64(response.Items.Item.ItemAttributes.UPC);
                     item.Model = response.Items.Item.ItemAttributes.Model != null ? response.Items.Item.ItemAttributes.Model : "";
@@ -527,7 +532,12 @@ namespace K2Field.SmartObjects.Services.AmazonAdvertising
                         item.Manufacturer = resultItem.ItemAttributes.Manufacturer != null ? resultItem.ItemAttributes.Manufacturer : "";
                         item.ProductGroup = resultItem.ItemAttributes.ProductGroup != null ? resultItem.ItemAttributes.ProductGroup : "";
                         item.Title = resultItem.ItemAttributes.Title != null ? resultItem.ItemAttributes.Title : "";
-                        item.FeatureDescription = resultItem.ItemAttributes.Feature != null ? string.Join(" ", resultItem.ItemAttributes.Feature)  : "";
+
+                        if (resultItem.ItemAttributes.Feature != null && resultItem.ItemAttributes.Feature.Count() > 0)
+                        {
+                            item.FeatureDescription = resultItem.ItemAttributes.Feature != null ? string.Join(" ", resultItem.ItemAttributes.Feature) : "";
+                        }
+
                         item.Model = resultItem.ItemAttributes.Model != null ? resultItem.ItemAttributes.Model : "";
                         item.UPC = Convert.ToInt64(resultItem.ItemAttributes.UPC);
                         item.ProductType = resultItem.ItemAttributes.ProductTypeName;
